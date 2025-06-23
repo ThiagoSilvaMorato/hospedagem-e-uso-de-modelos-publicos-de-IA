@@ -14,8 +14,8 @@ export default class ImageCaptioner {
   }
 
   static async generateCaption(imgSrc) {
-    return this.getCaptioner().then((captioner) => {
-      captioner(imgSrc, {
+    return await this.getCaptioner().then((captioner) => {
+      return captioner(imgSrc, {
         do_sample: true,
       });
     });
