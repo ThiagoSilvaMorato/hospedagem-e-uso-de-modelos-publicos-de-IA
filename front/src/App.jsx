@@ -6,20 +6,22 @@ function App() {
   const [imgSrc, setImgSrc] = useState(null);
   const [caption, setCaption] = useState("<Caption />");
 
-  function addCaption() {
-    const caption = generateCaption(imgSrc);
+  async function addCaption() {
+    setCaption("Gerando legenda...");
 
-    setCaption(caption);
+    const caption = await generateCaption(imgSrc);
+
+    setCaption(caption[0]["generated_text"]);
   }
 
   return (
     <>
       <h1>Caption Generator</h1>
-      <div class='url-form'>
+      <div className='url-form'>
         <input onChange={(e) => setImgSrc(e.target.value)} />
         <button onClick={addCaption}>Generate</button>
       </div>
-      <div class='captioned-image'>
+      <div className='captioned-image'>
         <img height={200} src={imgSrc} alt='' style={{ marginBottom: "10px" }} />
         <span>{caption}</span>
       </div>
